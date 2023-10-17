@@ -1,4 +1,4 @@
-# BlackFridaySales
+# BlackFridaySalesAnalysis
 This Python script performs an analysis of Black Friday sales data. It includes data visualization and regression modeling.
 
 # Prerequisites
