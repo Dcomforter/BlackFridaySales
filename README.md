@@ -26,12 +26,12 @@ pip install numpy pandas matplotlib seaborn scikit-learn xgboost
 
 # File Structure
 "black_friday_sales_analysis.py": Contains the main Python script.
-"customer.csv": Input data file in CSV format.
+"sales_record.csv": Input data file in CSV format.
 
 # Scripts Explanation
 The script performs the following tasks:
 
-1. Loading Data: Loads the Black Friday sales data from the "customer.csv" file.
+1. Loading Data: Loads the Black Friday sales data from the "sales_record.csv" file.
 2. Data Exploration:
     Displays basic information about the dataset, such as shape, data types, and missing values.
     Visualizes the distribution of the 'Purchase' column.
