@@ -45,13 +45,13 @@ The script performs the following tasks:
     Visualizes the distribution of 'Age'.
     Visualizes the distribution of 'Product_Category_1', 'Product_Category_2', and 'Product_Category_3'.
     Displays a heatmap of the correlation matrix.
-3. Data Preprocessing:
+### 3. Data Preprocessing:
     Drops unnecessary columns ('User_ID' and 'Product_ID').
     Handles missing values in 'Product_Category_2' and 'Product_Category_3'.
     Encodes categorical variables.
     Splits the data into features (X) and target variable (y).
     Splits the data into training and testing sets.
-4. Modeling:
+### 4. Modeling:
     Trains a Linear Regression model.
     Evaluates the Linear Regression model.
     Trains a Decision Tree Regression model.
