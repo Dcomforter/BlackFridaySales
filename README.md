@@ -22,10 +22,10 @@ pip install numpy pandas matplotlib seaborn scikit-learn xgboost
    cd BlackFridaySalesAnalysis
 
 3. Run the script:
-   python black_friday_sales_analysis.py
+   python black_friday.py
 
 ## File Structure
-"black_friday_sales_analysis.py": Contains the main Python script.
+"black_friday.py": Contains the main Python script.
 "sales_record.csv": Input data file in CSV format.
 
 ## Scripts Explanation
