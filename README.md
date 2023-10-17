@@ -33,7 +33,7 @@ The script performs the following tasks:
 
 ### 1. Loading Data: 
     Loads the Black Friday sales data from the "sales_record.csv" file.
-2. Data Exploration:
+### 2. Data Exploration:
     Displays basic information about the dataset, such as shape, data types, and missing values.
     Visualizes the distribution of the 'Purchase' column.
     Visualizes the boxplot of 'Purchase'.
