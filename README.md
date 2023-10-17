@@ -1,7 +1,7 @@
 # BlackFridaySalesAnalysis
 This Python script performs an analysis of Black Friday sales data. It includes data visualization and regression modeling.
 
-# Prerequisites
+## Prerequisites
 Make sure you have the following libraries installed:
 
 * numpy
@@ -14,7 +14,7 @@ Make sure you have the following libraries installed:
 You can install the required packages using the following command:
 pip install numpy pandas matplotlib seaborn scikit-learn xgboost
 
-# Usage
+## Usage
 1. Clone the repository:
    git clone https://github.com/Dcomforter/BlackFridaySalesAnalysis.git
 
@@ -24,14 +24,15 @@ pip install numpy pandas matplotlib seaborn scikit-learn xgboost
 3. Run the script:
    python black_friday_sales_analysis.py
 
-# File Structure
+## File Structure
 "black_friday_sales_analysis.py": Contains the main Python script.
 "sales_record.csv": Input data file in CSV format.
 
-# Scripts Explanation
+## Scripts Explanation
 The script performs the following tasks:
 
-1. Loading Data: Loads the Black Friday sales data from the "sales_record.csv" file.
+### 1. Loading Data: 
+    Loads the Black Friday sales data from the "sales_record.csv" file.
 2. Data Exploration:
     Displays basic information about the dataset, such as shape, data types, and missing values.
     Visualizes the distribution of the 'Purchase' column.
