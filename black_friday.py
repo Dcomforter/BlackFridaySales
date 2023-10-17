@@ -10,8 +10,6 @@ from xgboost.sklearn import XGBRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.preprocessing import LabelEncoder
 
-<<<<<<< HEAD
-=======
 data = pd.read_csv("sales_record.csv")
 data.head()
 data.shape
@@ -19,7 +17,6 @@ data.info()
 data.isnull().sum()
 data.isnull().sum()/data.shape[0]*100
 data.nunique()
->>>>>>> e257d4e91b25e4e74b40efd3d2476b05bd623bbd
 
 class BlackFridaySalesAnalysis:
     def __init__(self, data_file):
