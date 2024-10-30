@@ -10,14 +10,6 @@ from xgboost.sklearn import XGBRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.preprocessing import LabelEncoder
 
-data = pd.read_csv("sales_record.csv")
-data.head()
-data.shape
-data.info()
-data.isnull().sum()
-data.isnull().sum()/data.shape[0]*100
-data.nunique()
-
 class BlackFridaySalesAnalysis:
     def __init__(self, data_file):
         self.data = pd.read_csv(data_file)
@@ -28,13 +20,14 @@ class BlackFridaySalesAnalysis:
         self.y_train = None
         self.y_test = None
 
-    def display_basic_info(self):
-        print(self.data.head())
-        print(self.data.shape)
+    def summarize_data(self):
+        """Displays basic information about the dataset."""
+        print("Data Shape:", self.data.shape)
+        print("\nData Info:")
         print(self.data.info())
-        print(self.data.isnull().sum())
-        print(self.data.isnull().sum() / self.data.shape[0] * 100)
-        print(self.data.nunique())
+        print("\nMissing Values:\n", self.data.isnull().sum())
+        print("\nUnique Values:\n", self.data.nunique())
+        print("\nSummary Statistics:\n", self.data.describe())
 
     def visualize_purchase_distribution(self):
         sns.displot(self.data["Purchase"], color='r')
@@ -42,266 +35,97 @@ class BlackFridaySalesAnalysis:
         plt.show()
 
     def visualize_purchase_boxplot(self):
-        sns.boxplot(self.data["Purchase"])
+        sns.boxplot(x=self.data["Purchase"])
         plt.title("Boxplot of Purchase")
         plt.show()
 
-    # Add more visualization functions as needed
-    def visualize_gender_distribution(self):
-        self.data["Purchase"].skew()
-        self.data["Purchase"].kurtosis()
-        self.data["Purchase"].describe()
-        sns.countplot(self.data['Gender'])
+    def visualize_categorical_distributions(self):
+        """Visualizes various categorical distributions and purchase correlations."""
+        plt.figure(figsize=(15, 6))
+        sns.countplot(x=self.data['Gender'])
+        plt.title('Gender Distribution')
         plt.show()
 
-    # Shows Marital Status Distribution
-    def visualize_marital_status(self):
-        self.data['Gender'].value_counts(normalize=True) * 100
-        self.data.groupby("Gender").mean(numeric_only=True)["Purchase"]
-
-        sns.countplot(self.data['Marital_Status'])
+        plt.figure(figsize=(15, 6))
+        sns.countplot(x=self.data['Marital_Status'])
+        plt.title('Marital Status Distribution')
         plt.show()
 
-    def visualize_marital_and_purchase(self):
-        self.data.groupby("Marital_Status").mean()["Purchase"]
-
-        self.data.groupby("Marital_Status").mean()["Purchase"].plot(kind='bar')
-        plt.title("Marital_Status and Purchase Analysis")
-        plt.show()
-
-    def visualize_occupation_distribution(self):
         plt.figure(figsize=(18, 5))
         sns.countplot(self.data['Occupation'])
+        plt.title('Occupation Distribution')
         plt.show()
 
-    def visualize_occupation_purchase(self):
-        occup = pd.DataFrame(self.data.groupby("Occupation").mean()["Purchase"])
-        occup
-
-        occup.plot(kind='bar', figsize=(15, 5))
-        plt.title("Occupation and Purchase Analysis")
-        plt.show()
-
-    def visualize_city_category(self):
-        sns.countplot(self.data['City_Category'])
-        plt.show()
-
-    def visualize_city_and_purchase(self):
-        self.data.groupby("City_Category").mean()["Purchase"].plot(kind='bar')
-        plt.title("City Category and Purchase Analysis")
-        plt.show()
-
-    def visualize_stay_in_years(self):
-        sns.countplot(self.data['Stay_In_Current_City_Years'])
-        plt.show()
-
-    def visualize_stay_in_and_purchase(self):
-        self.data.groupby("Stay_In_Current_City_Years").mean()["Purchase"].plot(kind='bar')
-        plt.title("Stay_In_Current_City_Years and Purchase Analysis")
-        plt.show()
-
-    def visualize_age_distribution(self):
-        sns.countplot(self.data['Age'])
-        plt.title('Distribution of Age')
-        plt.xlabel('Different Categories of Age')
-        plt.show()
-
-    def visualize_age_and_purchase(self):
-        self.data.groupby("Age").mean()["Purchase"].plot(kind='bar')
-
-        self.data.groupby("Age").sum()['Purchase'].plot(kind="bar")
-        plt.title("Age and Purchase Analysis")
-        plt.show()
-
-    def visualize_product_one_analysis(self):
-        plt.figure(figsize=(18, 5))
-        sns.countplot(self.data['Product_Category_1'])
-        plt.show()
-
-        self.data.groupby('Product_Category_1').mean()['Purchase'].plot(kind='bar', figsize=(18, 5))
-        plt.title("Product_Category_1 and Purchase Mean Analysis")
-        plt.show()
-
-        self.data.groupby('Product_Category_1').sum()['Purchase'].plot(kind='bar', figsize=(18, 5))
-        plt.title("Product_Category_1 and Purchase Analysis")
-        plt.show()
-
-    def visualize_product_two_analysis(self):
-        plt.figure(figsize=(18, 5))
-        sns.countplot(self.data['Product_Category_2'])
-        plt.show()
-
-        self.data.groupby('Product_Category_2').mean()['Purchase'].plot(kind='bar', figsize=(18, 5))
-        plt.title("Product_Category_2 and Purchase Mean Analysis")
-        plt.show()
-
-        self.data.groupby('Product_Category_2').sum()['Purchase'].plot(kind='bar', figsize=(18, 5))
-        plt.title("Product_Category_2 and Purchase Analysis")
-        plt.show()
-
-    def visualize_product_three_analysis(self):
-        plt.figure(figsize=(18, 5))
-        sns.countplot(self.data['Product_Category_3'])
-        plt.show()
-
-        self.data.groupby('Product_Category_3').mean()['Purchase'].plot(kind='bar', figsize=(18, 5))
-        plt.title("Product_Category_3 and Purchase Mean Analysis")
-        plt.show()
-
-        self.data.groupby('Product_Category_3').sum()['Purchase'].plot(kind='bar', figsize=(18, 5))
-        plt.title("Product_Category_3 and Purchase Analysis")
-        plt.show()
+        # Add more as needed...
 
     def visualize_heatmap(self):
-        self.data.corr()
-        sns.heatmap(self.data.corr(), annot=True)
+        # Select only numeric columns
+        numeric_data = self.data.select_dtypes(include=[np.number])
+        plt.figure(figsize=(10, 8))
+        sns.heatmap(numeric_data.corr(), annot=True)
+        plt.title("Feature Correlation Heatmap")
         plt.show()
 
     def preprocess_data(self):
-        # Dropping User_ID and Product_ID columns
+        """Preprocesses the data by encoding, filling missing values, and splitting."""
         self.data = self.data.drop(["User_ID", "Product_ID"], axis=1)
-
-        # Handling missing values in Product_Category_2 and Product_Category_3
         self.data['Product_Category_2'].fillna(0, inplace=True)
         self.data['Product_Category_3'].fillna(0, inplace=True)
 
         # Encoding categorical variables
-        lr = LabelEncoder()
-        self.data = pd.get_dummies(self.data, columns=['Stay_In_Current_City_Years'])
-        self.data['Gender'] = lr.fit_transform(self.data['Gender'])
-        self.data['Age'] = lr.fit_transform(self.data['Age'])
-        self.data['City_Category'] = lr.fit_transform(self.data['City_Category'])
+        label_encoder = LabelEncoder()
+        self.data['Gender'] = label_encoder.fit_transform(self.data['Gender'])
+        self.data['Age'] = label_encoder.fit_transform(self.data['Age'])
+        self.data['City_Category'] = label_encoder.fit_transform(self.data['City_Category'])
+        self.data = pd.get_dummies(self.data, columns=['Stay_In_Current_City_Years'], drop_first=True)
 
         # Separating features and target variable
         self.X = self.data.drop("Purchase", axis=1)
-        self.y = self.data['Purchase']
+        self.y = self.data["Purchase"]
 
-        # Splitting the data into training and testing sets
-        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size=0.3,
-                                                                                random_state=123)
+        # Splitting data
+        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size=0.3, random_state=123)
 
-    # Trains Linear Regression Model
-    def train_linear_regression(self):
-        # Add code for training linear regression model here
-        Lregressor = LinearRegression()
-        Lregressor.fit(self.X_train, self.y_train)
-        return Lregressor
-
-    # Evaluates Linear Regression Model
-    def evaluate_linear_regression_model(self, model, X_test, y_test):
-        # Add code for evaluating linear regression model here
-        y_pred = model.predict(X_test)
-        mae = mean_absolute_error(y_test, y_pred)
-        mse = mean_squared_error(y_test, y_pred)
-        rmse = np.sqrt(mse)
-        r2 = r2_score(y_test, y_pred)
-        return {'MAE': mae, 'MSE': mse, 'RMSE': rmse, 'R-squared': r2}
-
-    # Trains Decision Tree Regression Model
-    def train_decision_tree_regression(self):
-        DTregressor = DecisionTreeRegressor(random_state = 0)
-        DTregressor.fit(self.X_train, self.y_train)
-        return DTregressor
-
-    # Evaluates Decision Tree Regression Model
-    def evaluate_decision_tree_regression_model(self, model, X_test, y_test):
-        y_pred = model.predict(X_test)
-        mae = mean_absolute_error(y_test, y_pred)
-        mse = mean_squared_error(y_test, y_pred)
-        rmse = np.sqrt(mse)
-        r2 = r2_score(y_test, y_pred)
-        return {'MAE': mae, 'MSE': mse, 'RMSE': rmse, 'R-squared': r2}
-
-    # Trains Random Forest Regression Model
-    def train_random_forest_regression(self):
-        RFregressor = RandomForestRegressor(random_state = 0)
-        RFregressor.fit(self.X_train, self.y_train)
-        return RFregressor
-
-    # Evaluates Random Forest Regression Model
-    def evaluate_random_forest_regression_model(self, model, X_test, y_test):
-        y_pred = model.predict(X_test)
-        mae = mean_absolute_error(y_test, y_pred)
-        mse = mean_squared_error(y_test, y_pred)
-        rmse = np.sqrt(mse)
-        r2 = r2_score(y_test, y_pred)
-        return {'MAE': mae, 'MSE': mse, 'RMSE': rmse, 'R-squared': r2}
-
-    # Trains XGBoost Regression Model
-    def train_XGBoost_regression(self):
-        XGBregressor = XGBRegressor(learning_rate=1.0, max_depth=6, min_child_weight=40, seed=0)
-        XGBregressor.fit(self.X_train, self.y_train)
-        return XGBregressor
-
-    # Evaluates XGBoost Regression Model
-    def evaluate_XGBoost_regression_model(self, model, X_test, y_test):
-        y_pred = model.predict(X_test)
-        mae = mean_absolute_error(y_test, y_pred)
-        mse = mean_squared_error(y_test, y_pred)
-        rmse = np.sqrt(mse)
-        r2 = r2_score(y_test, y_pred)
-        return {'MAE': mae, 'MSE': mse, 'RMSE': rmse, 'R-squared': r2}
+    def fit_and_evaluate(self, model):
+        """Fits and evaluates a model, returning performance metrics."""
+        model.fit(self.X_train, self.y_train)
+        y_pred = model.predict(self.X_test)
+        metrics = {
+            'MAE': mean_absolute_error(self.y_test, y_pred),
+            'MSE': mean_squared_error(self.y_test, y_pred),
+            'RMSE': np.sqrt(mean_squared_error(self.y_test, y_pred)),
+            'R-squared': r2_score(self.y_test, y_pred)
+        }
+        return metrics
 
 def main():
     data_file = "sales_record.csv"
     analysis = BlackFridaySalesAnalysis(data_file)
 
-    analysis.display_basic_info()
+    # Display data summary
+    analysis.summarize_data()
+
+    # Visualize data distributions
     analysis.visualize_purchase_distribution()
     analysis.visualize_purchase_boxplot()
-    analysis.visualize_gender_distribution()
-    analysis.visualize_marital_status()
-    analysis.visualize_marital_and_purchase()
-    analysis.visualize_occupation_distribution()
-    analysis.visualize_occupation_purchase()
-    analysis.visualize_city_category()
-    analysis.visualize_city_and_purchase()
-    analysis.visualize_stay_in_years()
-    analysis.visualize_stay_in_and_purchase()
-    analysis.visualize_age_distribution()
-    analysis.visualize_age_and_purchase()
-    analysis.visualize_product_one_analysis()
-    analysis.visualize_product_two_analysis()
-    analysis.visualize_product_three_analysis()
+    analysis.visualize_categorical_distributions()
     analysis.visualize_heatmap()
-
-    # Add more analysis and modeling steps as needed
 
     # Preprocess the data
     analysis.preprocess_data()
 
-    # Train a Linear Regression model
-    lr_model = analysis.train_linear_regression()
+    # Train and evaluate models
+    models = {
+        "Linear Regression": LinearRegression(),
+        "Decision Tree": DecisionTreeRegressor(random_state=0),
+        "Random Forest": RandomForestRegressor(random_state=0),
+        "XGBoost": XGBRegressor(learning_rate=1.0, max_depth=6, min_child_weight=40, seed=0)
+    }
 
-    # Evaluate the model
-    evaluation_metrics = analysis.evaluate_linear_regression_model(lr_model, analysis.X_test, analysis.y_test)
-    print("Linear Regression Model Evaluation:")
-    print(evaluation_metrics)
-
-    # Train a Decision Tree Regression model
-    dt_model = analysis.train_decision_tree_regression()
-
-    # Evaluate the model
-    dt_evaluation_metrics = analysis.evaluate_decision_tree_regression_model(dt_model, analysis.X_test, analysis.y_test)
-    print("Decision Tree Regression Model Evaluation:")
-    print(dt_evaluation_metrics)
-
-    # Train a Random Forest Regression model
-    rf_model = analysis.train_random_forest_regression()
-
-    # Evaluate the model
-    rf_evaluation_metrics = analysis.evaluate_random_forest_regression_model(rf_model, analysis.X_test, analysis.y_test)
-    print("Random Forest Regression Model Evaluation:")
-    print(rf_evaluation_metrics)
-
-    # Train an XGBoost Regression model
-    xgb_model = analysis.train_XGBoost_regression()
-
-    # Evaluate the model
-    xgb_evaluation_metrics = analysis.evaluate_XGBoost_regression_model(xgb_model, analysis.X_test, analysis.y_test)
-    print("XGBoost Regression Model Evaluation:")
-    print(xgb_evaluation_metrics)
-
+    for model_name, model in models.items():
+        print(f"\nEvaluating {model_name}...")
+        metrics = analysis.fit_and_evaluate(model)
+        print(f"{model_name} Metrics:\n", metrics)
 
 if __name__ == "__main__":
     main()
