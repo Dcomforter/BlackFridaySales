@@ -59,18 +59,21 @@ class BlackFridaySalesAnalysis:
         plt.title('Marital Status Distribution')
         plt.show()
 
+        # Occupation Distribution
         plt.figure(figsize=(14, 5))
         sns.countplot(data=self.data, x='Occupation')
         plt.title("Occupation Distribution")
         plt.xlabel("Occupation Code")
         plt.show()
 
+        # City Category Distribution
         plt.figure(figsize=(6, 4))
         sns.countplot(data=self.data, x='City_Category')
         plt.title("City Category Distribution")
         plt.xlabel("City Category (A, B, C)")
         plt.show()
 
+        # Stay In Current City Distribution
         plt.figure(figsize=(8, 5))
         sns.countplot(data=self.data, x='Stay_In_Current_City_Years')
         plt.title("Stay In Current City Years Distribution")
