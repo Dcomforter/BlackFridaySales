@@ -46,6 +46,13 @@ class BlackFridaySalesAnalysis:
         plt.title('Gender Distribution')
         plt.show()
 
+        # Age Distribution
+        plt.figure(figsize=(8, 5))
+        sns.countplot(data=self.data, x='Age', order=sorted(self.data['Age'].unique()))
+        plt.title("Age Distribution")
+        plt.xlabel("Age Groups")
+        plt.show()
+
         plt.figure(figsize=(15, 6))
         sns.countplot(x=self.data['Marital_Status'])
         plt.title('Marital Status Distribution')
