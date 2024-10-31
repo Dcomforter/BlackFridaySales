@@ -51,12 +51,46 @@ class BlackFridaySalesAnalysis:
         plt.title('Marital Status Distribution')
         plt.show()
 
-        plt.figure(figsize=(18, 5))
-        sns.countplot(self.data['Occupation'])
-        plt.title('Occupation Distribution')
+        plt.figure(figsize=(14, 5))
+        sns.countplot(data=self.data, x='Occupation')
+        plt.title("Occupation Distribution")
+        plt.xlabel("Occupation Code")
+        plt.show()
+
+        plt.figure(figsize=(6, 4))
+        sns.countplot(data=self.data, x='City_Category')
+        plt.title("City Category Distribution")
+        plt.xlabel("City Category (A, B, C)")
+        plt.show()
+
+        plt.figure(figsize=(8, 5))
+        sns.countplot(data=self.data, x='Stay_In_Current_City_Years')
+        plt.title("Stay In Current City Years Distribution")
+        plt.xlabel("Years in Current City")
         plt.show()
 
         # Add more as needed...
+
+        # Product Category 1 Distribution
+        plt.figure(figsize=(14, 5))
+        sns.countplot(data=self.data, x='Product_Category_1')
+        plt.title("Product Category 1 Distribution")
+        plt.xlabel("Product Category 1")
+        plt.show()
+
+        # Product Category 2 Distribution
+        plt.figure(figsize=(14, 5))
+        sns.countplot(data=self.data, x='Product_Category_2')
+        plt.title("Product Category 2 Distribution")
+        plt.xlabel("Product Category 2")
+        plt.show()
+
+        # Product Category 3 Distribution
+        plt.figure(figsize=(14, 5))
+        sns.countplot(data=self.data, x='Product_Category_3')
+        plt.title("Product Category 3 Distribution")
+        plt.xlabel("Product Category 3")
+        plt.show()
 
     def visualize_heatmap(self):
         # Select only numeric columns
@@ -115,17 +149,17 @@ def main():
     analysis.preprocess_data()
 
     # Train and evaluate models
-    models = {
-        "Linear Regression": LinearRegression(),
-        "Decision Tree": DecisionTreeRegressor(random_state=0),
-        "Random Forest": RandomForestRegressor(random_state=0),
-        "XGBoost": XGBRegressor(learning_rate=1.0, max_depth=6, min_child_weight=40, seed=0)
-    }
+    # models = {
+    #     "Linear Regression": LinearRegression(),
+    #     "Decision Tree": DecisionTreeRegressor(random_state=0),
+    #     "Random Forest": RandomForestRegressor(random_state=0),
+    #     "XGBoost": XGBRegressor(learning_rate=1.0, max_depth=6, min_child_weight=40, seed=0)
+    # }
 
-    for model_name, model in models.items():
-        print(f"\nEvaluating {model_name}...")
-        metrics = analysis.fit_and_evaluate(model)
-        print(f"{model_name} Metrics:\n", metrics)
+    # for model_name, model in models.items():
+    #     print(f"\nEvaluating {model_name}...")
+    #     metrics = analysis.fit_and_evaluate(model)
+    #     print(f"{model_name} Metrics:\n", metrics)
 
 if __name__ == "__main__":
     main()
