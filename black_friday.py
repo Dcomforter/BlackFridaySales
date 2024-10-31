@@ -156,17 +156,17 @@ def main():
     analysis.preprocess_data()
 
     # Train and evaluate models
-    # models = {
-    #     "Linear Regression": LinearRegression(),
-    #     "Decision Tree": DecisionTreeRegressor(random_state=0),
-    #     "Random Forest": RandomForestRegressor(random_state=0),
-    #     "XGBoost": XGBRegressor(learning_rate=1.0, max_depth=6, min_child_weight=40, seed=0)
-    # }
+    models = {
+        "Linear Regression": LinearRegression(),
+        "Decision Tree": DecisionTreeRegressor(random_state=0),
+        "Random Forest": RandomForestRegressor(random_state=0),
+        "XGBoost": XGBRegressor(learning_rate=1.0, max_depth=6, min_child_weight=40, seed=0)
+    }
 
-    # for model_name, model in models.items():
-    #     print(f"\nEvaluating {model_name}...")
-    #     metrics = analysis.fit_and_evaluate(model)
-    #     print(f"{model_name} Metrics:\n", metrics)
+    for model_name, model in models.items():
+        print(f"\nEvaluating {model_name}...")
+        metrics = analysis.fit_and_evaluate(model)
+        print(f"{model_name} Metrics:\n", metrics)
 
 if __name__ == "__main__":
     main()
