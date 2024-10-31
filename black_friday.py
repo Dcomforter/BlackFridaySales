@@ -53,6 +53,7 @@ class BlackFridaySalesAnalysis:
         plt.xlabel("Age Groups")
         plt.show()
 
+        # Marital Status Distribution
         plt.figure(figsize=(15, 6))
         sns.countplot(x=self.data['Marital_Status'])
         plt.title('Marital Status Distribution')
