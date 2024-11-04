@@ -20,6 +20,7 @@ class BlackFridaySalesAnalysis:
         self.y_train = None
         self.y_test = None
 
+    # Dataset Summary
     def summarize_data(self):
         """Displays basic information about the dataset."""
         print("Data Shape:", self.data.shape)
@@ -29,6 +30,7 @@ class BlackFridaySalesAnalysis:
         print("\nUnique Values:\n", self.data.nunique())
         print("\nSummary Statistics:\n", self.data.describe())
 
+    # Purchase Distribution Visualization
     def visualize_purchase_distribution(self):
         sns.displot(self.data["Purchase"], color='r')
         plt.title("Purchase Distribution")
