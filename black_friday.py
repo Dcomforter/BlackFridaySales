@@ -34,11 +34,13 @@ class BlackFridaySalesAnalysis:
         plt.title("Purchase Distribution")
         plt.show()
 
+    # Purchase Boxplot Visualization
     def visualize_purchase_boxplot(self):
         sns.boxplot(x=self.data["Purchase"])
         plt.title("Boxplot of Purchase")
         plt.show()
 
+    # Categorical Distribution Visualizations
     def visualize_categorical_distributions(self):
         """Visualizes various categorical distributions and purchase correlations."""
         plt.figure(figsize=(15, 6))
