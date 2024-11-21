@@ -61,6 +61,9 @@ The script performs the following tasks:
     Trains an XGBoost Regression model.
     Evaluates the XGBoost Regression model.
 
+## Purchase Distribution
+The figure below shows the Purchase Distribution of the dataset.
+
 ![Purchase Distribution Image](img/Figure_1.png)
 
 ## License
