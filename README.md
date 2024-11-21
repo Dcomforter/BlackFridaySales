@@ -64,9 +64,19 @@ The script performs the following tasks:
     Evaluates the XGBoost Regression model.
 
 ## Purchase Distribution
-The figure below shows the Purchase Distribution of the dataset.
+The figure below shows the Purchase Distribution from the dataset.
 
 ![Purchase Distribution Image](img/Figure_1.png)
+
+## Boxplot of Purchase
+The figure below shows the Boxplot of Purchase from the dataset.
+
+![Boxplot of Purchase](img/Figure_2.png)
+
+## Feature Correlation Heatmap
+The figure below shows the Feature Correlation Heatmap from the dataset.
+
+![Feature Correlation Heatmap](img/Figure_3.png)
 
 ## License
 
