@@ -28,6 +28,7 @@ pip install numpy pandas matplotlib seaborn scikit-learn xgboost
 * "black_friday.py": Contains the main Python script.
 * "sales_record.csv": Input data file in CSV format.
 * "img": This folder contains images of a couple of the distribution charts.
+* "requirements.txt": Contains the libraries and modules needed to run the program.
 
 ## Scripts Explanation
 The script performs the following tasks:
