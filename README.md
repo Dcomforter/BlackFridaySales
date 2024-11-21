@@ -61,6 +61,8 @@ The script performs the following tasks:
     Trains an XGBoost Regression model.
     Evaluates the XGBoost Regression model.
 
+![Purchase Distribution Image](img/Figure_1.png)
+
 ## License
 
 This project is licensed under the MIT License - see the [License](LICENSE) file for details.
